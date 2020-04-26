@@ -1,0 +1,69 @@
+# NuGet Files
+*.nuget.targets
+*.nuget.props
+
+# Tests
+.test/
+
+# VSCode
+**/.vs/
+**/.vscode/
+packages/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+
+# Roslyn cache directories
+**/*.ide/
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.scc
+*.g.cs
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Others
+sql/
+*.Cache
+ClientBin/
+[Ss]tyle[Cc]op.*
+~$*
+*~
+*.dbmdl
+*.[Pp]ublish.xml
+*.pfx
+*.publishsettings

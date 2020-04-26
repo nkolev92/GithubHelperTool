@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GithubIssueTagger": {
+      "commandName": "Project",
+      "commandLineArgs": "782d4c571dbeb1a76d3e170b43431e37f50457c2"
+    }
+  }
+}
