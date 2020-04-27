@@ -1,23 +1,55 @@
-﻿using Octokit;
-using System;
+﻿using CommandLine;
+using GithubHelperTool.Options;
+using Octokit;
 using System.Threading.Tasks;
 
 namespace GithubHelperTool
 {
-    public class Program
+    public partial class Program
     {
-        static async Task Main(string[] args)
+        static int Main(string[] args)
         {
-            if (args.Length != 1)
-            {
-                Console.WriteLine("Expected 1 argument (github PAT). Found " + args.Length);
-                return;
-            }
-            var client = new GitHubClient(new ProductHeaderValue("nuget-github-issue-tagger"));
-            client.Credentials = new Credentials(args[0]);
+            // TODO NK - figure out how to parse stuff better.
+            return Parser.Default.ParseArguments<MoveOptions>(args)
+               .MapResult(
+                 (MoveOptions moveOptions) => RunMoveCommand(moveOptions),
+                 errs => 1);
+        }
 
+        private static int RunCopyCommand(CopyOptions opts)
+        {
+            return RunCopyCommandAsync(opts).GetAwaiter().GetResult();
+        }
+
+        private static async Task<int> RunCopyCommandAsync(CopyOptions opts)
+        {
+            var client = new GitHubClient(new ProductHeaderValue("github-helper-tool"));
+            client.Credentials = new Credentials(opts.PAT);
             var handler = new IssueHandler(client);
-            await handler.CopyIssue("nkolev92", "FromTestRepo", 1, "nkolev92", "ToTestRepo");
+
+            (string, string, int) fromIssue = UriUtilities.GetIssueDetails(opts.FromIssue);
+            (string, string) toRepo = UriUtilities.GetRepoDetails(opts.ToRepository);
+
+            await handler.CopyIssue(fromIssue.Item1, fromIssue.Item2, fromIssue.Item3, toRepo.Item1, toRepo.Item2);
+            return 0;
+        }
+
+        private static int RunMoveCommand(MoveOptions opts)
+        {
+            return RunMoveCommandAsync(opts).GetAwaiter().GetResult();
+        }
+
+        private static async Task<int> RunMoveCommandAsync(MoveOptions opts)
+        {
+            var client = new GitHubClient(new ProductHeaderValue("github-helper-tool"));
+            client.Credentials = new Credentials(opts.PAT);
+            var handler = new IssueHandler(client);
+
+            (string, string, int) fromIssue = UriUtilities.GetIssueDetails(opts.FromIssue);
+            (string, string) toRepo = UriUtilities.GetRepoDetails(opts.ToRepository);
+
+            await handler.MoveIssue(fromIssue.Item1, fromIssue.Item2, fromIssue.Item3, toRepo.Item1, toRepo.Item2);
+            return 0;
         }
     }
 }

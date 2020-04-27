@@ -121,4 +121,18 @@
     <value>{0} commented on [{1}]({2})</value>
     <comment>0 - alias, 1 - comment body, 2 - comment link</comment>
   </data>
+  <data name="Error_OperationFailed" xml:space="preserve">
+    <value>Unexpected operation failure. '{0}' failed with '{1}'.</value>
+    <comment>0 - operation name, 1 - error message</comment>
+  </data>
+  <data name="Error_UnparsableIssueUrl" xml:space="preserve">
+    <value>The provided url could not be parsed, '{0}'. Could not extract the issue details.</value>
+  </data>
+  <data name="Error_UnparsableRepoUrl" xml:space="preserve">
+    <value>The provided url could not be parsed, '{0}'. Could not extract the organization and repository.</value>
+  </data>
+  <data name="Error_UriHostNotSupported" xml:space="preserve">
+    <value>{0} is not a supported uri. Only Github uris are supported.</value>
+    <comment>0 - uri</comment>
+  </data>
 </root>

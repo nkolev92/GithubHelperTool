@@ -68,5 +68,41 @@ namespace GithubHelperTool {
                 return ResourceManager.GetString("CommentedOn", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected operation failure. &apos;{0}&apos; failed with &apos;{1}&apos;..
+        /// </summary>
+        internal static string Error_OperationFailed {
+            get {
+                return ResourceManager.GetString("Error_OperationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided url could not be parsed, &apos;{0}&apos;. Could not extract the issue details..
+        /// </summary>
+        internal static string Error_UnparsableIssueUrl {
+            get {
+                return ResourceManager.GetString("Error_UnparsableIssueUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided url could not be parsed, &apos;{0}&apos;. Could not extract the organization and repository..
+        /// </summary>
+        internal static string Error_UnparsableRepoUrl {
+            get {
+                return ResourceManager.GetString("Error_UnparsableRepoUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not a supported uri. Only Github uris are supported..
+        /// </summary>
+        internal static string Error_UriHostNotSupported {
+            get {
+                return ResourceManager.GetString("Error_UriHostNotSupported", resourceCulture);
+            }
+        }
     }
 }

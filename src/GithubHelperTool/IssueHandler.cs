@@ -1,5 +1,4 @@
 ﻿using Octokit;
-
 using System;
 using System.Threading.Tasks;
 
@@ -12,6 +11,25 @@ namespace GithubHelperTool
         public IssueHandler(GitHubClient client)
         {
             this.client = client ?? throw new ArgumentNullException(nameof(client));
+        }
+
+        public async Task MoveIssue(string fromOrganization, string fromRepo, int issueNumber, string toOrganization, string toRepo)
+        {
+            await CopyIssue(fromOrganization, fromRepo, issueNumber, toOrganization, toRepo);
+            try
+            {
+                var fromIssue = await client.Issue.Get(fromOrganization, fromRepo, issueNumber);
+                if (fromIssue.State == ItemState.Open)
+                {
+                    var issueUpdate = fromIssue.ToUpdate();
+                    issueUpdate.State = ItemState.Closed;
+                    await client.Issue.Update(fromOrganization, fromRepo, issueNumber, issueUpdate);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format(Strings.Error_OperationFailed, nameof(CopyIssue), e.Message), e);
+            }
         }
 
         public async Task CopyIssue(string fromOrganization, string fromRepo, int issueNumber, string toOrganization, string toRepo)
@@ -32,7 +50,7 @@ namespace GithubHelperTool
             }
             catch (Exception e)
             {
-                Console.WriteLine("Problem: " + e.Message);
+                throw new Exception(string.Format(Strings.Error_OperationFailed, nameof(CopyIssue), e.Message), e);
             }
         }
 
