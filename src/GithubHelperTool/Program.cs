@@ -9,9 +9,9 @@ namespace GithubHelperTool
     {
         static int Main(string[] args)
         {
-            // TODO NK - figure out how to parse stuff better.
-            return Parser.Default.ParseArguments<MoveOptions>(args)
+            return Parser.Default.ParseArguments<CopyOptions, MoveOptions>(args)
                .MapResult(
+                 (CopyOptions copyOptions) => RunCopyCommand(copyOptions),
                  (MoveOptions moveOptions) => RunMoveCommand(moveOptions),
                  errs => 1);
         }

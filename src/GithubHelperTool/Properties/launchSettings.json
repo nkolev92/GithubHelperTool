@@ -2,7 +2,7 @@
   "profiles": {
     "GithubIssueTagger": {
       "commandName": "Project",
-      "commandLineArgs": "782d4c571dbeb1a76d3e170b43431e37f50457c2"
+      "commandLineArgs": "move-issue --from https://github.com/nkolev92/FromTestRepo/issues/1 --to https://github.com/nkolev92/ToTestRepo/issues/ --pat 782d4c571dbeb1a76d3e170b43431e37f50457c2"
     }
   }
 }
